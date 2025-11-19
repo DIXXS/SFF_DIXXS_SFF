@@ -1,0 +1,116 @@
+#Задание 1
+def display_quote():
+    """Отображает цитату Стива Джобса."""
+    
+    quote = (
+        "“Don't let the noise of others' opinions\n"
+        "drown out your own inner voice.”\n"
+        "Steve Jobs"
+    )
+    print(" ЗАДАНИЕ 1 ")
+    print(quote)
+
+display_quote()
+def display_quote():
+    """Отображает цитату Стива Джобса."""
+    
+    quote = (
+        "“Don't let the noise of others' opinions\n"
+        "drown out your own inner voice.”\n"
+        "Steve Jobs"
+    )
+    print("--- ЗАДАНИЕ 1 ---")
+    print(quote)
+
+display_quote()
+
+#Задание 2
+def display_odd_numbers(start, end):
+    """Отображает все нечетные числа между start и end."""
+    
+    print("\n ЗАДАНИЕ 2 ")
+    print(f"Нечетные числа в диапазоне от {start} до {end}:")
+    
+    if start > end:
+        start, end = end, start
+        
+    for number in range(start, end + 1):
+        if number % 2 != 0:
+            print(number, end=" ")
+    print()
+
+display_odd_numbers(10, 25)
+#Задание 3
+def draw_line(length, direction, symbol):
+    """Отображает горизонтальную или вертикальную линию."""
+    
+    print("\n ЗАДАНИЕ 3 ")
+    
+    if direction.lower() == 'горизонтальная':
+        print(symbol * length)
+    elif direction.lower() == 'вертикальная':
+        for _ in range(length):
+            print(symbol)
+    else:
+        print("Ошибка: Неверное направление.")
+
+draw_line(15, 'горизонтальная', '*')
+draw_line(5, 'вертикальная', '#')
+#Задание 4
+def find_maximum(a, b, c, d):
+    """Возвращает максимальное из четырех чисел."""
+    
+    return max(a, b, c, d)
+
+print("\n ЗАДАНИЕ 4 ")
+max_num = find_maximum(10, 55, 3, 99)
+print(f"Максимальное число: {max_num}")
+#Задание 5 
+def sum_range(start, end):
+    """Возвращает сумму чисел в указанном диапазоне."""
+    
+    if start > end:
+        start, end = end, start
+        
+    total_sum = 0
+    for number in range(start, end + 1):
+        total_sum += number
+        
+    print("\n ЗАДАНИЕ 5 ")
+range_sum = sum_range(5, 10)
+print(f"Сумма чисел в диапазоне (5-10): {range_sum}")
+#Задание 6
+def is_prime(number):
+    """Проверяет, является ли число простым."""
+    
+    if number <= 1:
+        return False
+    
+    i = 2
+    while i * i <= number:
+        if number % i == 0:
+            return False
+        i += 1
+        
+    return True
+
+print("\n ЗАДАНИЕ 6 ")
+print(f"Число 17 простое? {is_prime(17)}")
+print(f"Число 15 простое? {is_prime(15)}")
+#Задание  7
+def is_lucky(number):
+    """Проверяет, является ли шестизначное число 'счастливым'."""
+    
+    if not 100000 <= number <= 999999:
+        return False 
+        
+    s = str(number)
+    
+    sum_first_half = int(s[0]) + int(s[1]) + int(s[2])
+    sum_second_half = int(s[3]) + int(s[4]) + int(s[5])
+    
+    return sum_first_half == sum_second_half
+
+print("\n ЗАДАНИЕ 7 ")
+print(f"Число 123420 счастливое? {is_lucky(123420)}")
+print(f"Число 777111 счастливое? {is_lucky(777111)}")
