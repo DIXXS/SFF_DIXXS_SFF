@@ -1,0 +1,90 @@
+import random
+import string
+
+# Глобальный набор для отслеживания уникальных паролей
+USED_PASSWORDS = set()
+
+# ЗАДАНИЕ 1: ГЕНЕРАЦИЯ ПАРОЛЯ
+
+def generate_password(length=12, use_upper=True, use_lower=True, use_digits=True, use_special=False):
+    """Генерирует пароль по заданным параметрам."""
+    
+    characters = ""
+    if use_upper:
+        characters += string.ascii_uppercase
+    if use_lower:
+        characters += string.ascii_lowercase
+    if use_digits:
+        characters += string.digits
+    if use_special:
+        characters += "!@#$%^&*()_+-="
+
+    if not characters:
+        return "Ошибка: Не выбран ни один тип символов."
+
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+test_pass_1 = generate_password(length=14, use_special=True)
+print("--- ЗАДАНИЕ 1: ГЕНЕРАЦИЯ ПАРОЛЯ ---")
+print(f"Сгенерированный пароль: {test_pass_1}")
+
+# ЗАДАНИЕ 2: ПРОВЕРКА НАДЕЖНОСТИ
+
+def check_strength(password):
+    """Проверяет надежность пароля."""
+    
+    score = 0
+    
+    if len(password) >= 8:
+        score += 1
+    if len(password) >= 12:
+        score += 1
+        
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    has_special = any(c in "!@#$%^&*()_+-=" for c in password)
+    
+    if has_upper: score += 1
+    if has_lower: score += 1
+    if has_digit: score += 1
+    if has_special: score += 1
+    
+    if score >= 5:
+        return "Сильный"
+    elif score >= 3:
+        return "Средний"
+    else:
+        return "Слабый"
+
+strength_result = check_strength(test_pass_1)
+print("\n--- ЗАДАНИЕ 2: ПРОВЕРКА НАДЕЖНОСТИ ---")
+print(f"Проверяемый пароль: {test_pass_1}")
+print(f"Уровень надежности: {strength_result}")
+
+
+
+# ЗАДАНИЕ 3: ГЕНЕРАЦИЯ УНИКАЛЬНОГО НАБОРА
+
+def generate_unique_passwords(count, length=10, **kwargs):
+    """Генерирует набор уникальных паролей."""
+    
+    unique_passwords = []
+    attempts = 0
+    max_attempts = count * 10 
+    
+    while len(unique_passwords) < count and attempts < max_attempts:
+        new_password = generate_password(length=length, **kwargs)
+        
+        if new_password not in USED_PASSWORDS:
+            unique_passwords.append(new_password)
+            USED_PASSWORDS.add(new_password)
+        
+        attempts += 1
+        
+    return unique_passwords
+
+unique_set = generate_unique_passwords(4, length=8, use_upper=True, use_digits=True)
+print("\n--- ЗАДАНИЕ 3: ГЕНЕРАЦИЯ УНИКАЛЬНОГО НАБОРА ---")
+print(f"Сгенерировано 4 уникальных пароля: {unique_set}")
